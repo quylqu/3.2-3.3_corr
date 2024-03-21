@@ -1,0 +1,13 @@
+package ru.kata.spring.boot_security.demo;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.io.IOException;
+
+@SpringBootApplication
+public class SpringApplication {
+
+    public static void main(String[] args) throws IOException {
+        org.springframework.boot.SpringApplication.run(SpringApplication.class, args);
+    }
+}
