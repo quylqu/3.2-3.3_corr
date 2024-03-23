@@ -7,17 +7,16 @@ import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.entities.User;
 import ru.kata.spring.boot_security.demo.services.UserServiceImpl;
 
-import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
-public class RestApiController {
+@RequestMapping("/api/admin")
+public class AdminController {
     @Autowired
     private final UserServiceImpl userServiceImpl;
 
-    public RestApiController(UserServiceImpl userServiceImpl) {
+    public AdminController(UserServiceImpl userServiceImpl) {
         this.userServiceImpl = userServiceImpl;
     }
 
@@ -43,17 +42,16 @@ public class RestApiController {
     public void pageDelete(@PathVariable("id") long id) {
         userServiceImpl.deleteById(id);
     }
-    
-    @GetMapping("/user")
-    public ResponseEntity<User> getUserByUsername(Principal principal) {
-        User user = userServiceImpl.findByUsername(principal.getName());
-        return ResponseEntity.ok(user);
-    }
 
     @PutMapping("/users/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void pageEdit(@PathVariable("id") long id,
                          @RequestBody User user) {
         userServiceImpl.save(user);
+    }
+    @GetMapping("/user")
+    public ResponseEntity<User> getUserByUsername(Principal principal) {
+        User user = userServiceImpl.findByUsername(principal.getName());
+        return ResponseEntity.ok(user);
     }
 }
